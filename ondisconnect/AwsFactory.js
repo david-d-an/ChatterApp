@@ -24,3 +24,7 @@ exports.GetSDK = () => {
   return AWS;
 };
 
+exports.GetAPI = (sdk, ctx) => new sdk.ApiGatewayManagementApi({
+  apiVersion: '2018-11-29',
+  endpoint: ctx.domainName + '/' + ctx.stage
+});

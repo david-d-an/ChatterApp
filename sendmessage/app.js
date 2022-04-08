@@ -1,5 +1,5 @@
 const { TABLE_NAME } = process.env;
-const { GetSDK } = require('./AwsFactory');
+const { GetSDK, GetAPI } = require('./AwsFactory');
 const aws = GetSDK();
 const ddb = new aws.DynamoDB.DocumentClient({ 
   apiVersion: '2012-08-10', 
@@ -23,12 +23,8 @@ exports.handler = async event => {
   } catch (e) {
     return { statusCode: 500, body: e.stack };
   }
-  
-  const apigwManagementApi = new aws.ApiGatewayManagementApi({
-    apiVersion: '2018-11-29',
-    endpoint: event.requestContext.domainName + '/' + event.requestContext.stage
-  });
 
+  const apigwManagementApi = GetAPI(aws, event.requestContext);
   const postData = JSON.parse(event.body).data;
   // console.log(`# postData: ${postData}`);
   
