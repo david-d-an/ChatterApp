@@ -1,0 +1,7 @@
+{
+    "requestContext": {
+        "domainName": "http://localhost:3000",
+        "stage": "dev"
+    },
+    "body": "{\"data\":\"Hello, I am using WebSocket APIs in API Gateway.\"}"
+}

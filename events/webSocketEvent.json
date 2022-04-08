@@ -1,0 +1,4 @@
+{
+    "action": "sendmessage",
+    "data": "Hello, I am using WebSocket APIs in API Gateway."
+}

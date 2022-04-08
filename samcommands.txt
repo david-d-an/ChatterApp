@@ -1,0 +1,11 @@
+sam init
+sam build
+sam package --s3-bucket virbela.sam.repository --output-template-file out.yaml
+sam deploy --guided
+sam local start-api
+sam local invoke HelloWorldFunction -e events/event.json
+sam logs
+sam logs --name HelloWorldFunction
+sam logs --stack-name MySamDemo --name HelloWorldFunction
+
+websockets-chat-app-stack

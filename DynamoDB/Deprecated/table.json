@@ -1,0 +1,16 @@
+{
+    "TableName": "simplechat_connections",
+    "KeySchema": [
+      { "AttributeName": "connectionId", "KeyType": "HASH" }
+    ],
+    "AttributeDefinitions": [
+      { "AttributeName": "connectionId", "AttributeType": "S" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    },
+    "SSESpecification": {
+        "Enabled": true
+    }
+}
