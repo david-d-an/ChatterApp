@@ -19,7 +19,7 @@ exports.handler = async event => {
     }
   };
 
-  // console.log('############ onDisconnect: connectionId = ', deleteParams.Item.connectionId);
+  // console.log(`# onDisconnect: connectionId: ${deleteParams.Item.connectionId}`);
 
   try {
     // Deregister the connection ID from DynamoDB

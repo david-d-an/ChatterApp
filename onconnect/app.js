@@ -13,7 +13,7 @@ exports.handler = async event => {
     }
   };
 
-  // console.log('############ onConnect: connectionId = ', putParams.Item.connectionId);
+  // console.log(`# onConnect: connectionId: ${putParams.Item.connectionId}`);
 
   try {
     // Register the connection ID to DynamoDB
