@@ -6,11 +6,11 @@ const ddb = new aws.DynamoDB.DocumentClient({
   region: 'us-east-2',
 });
 
-// console.log('ddb.config: ', JSON.stringify(ddb));
-// console.log('ddb.config.region: ', ddb.config.region);
-// console.log('ddb.config.endpoint: ', ddb.config.endpoint);
-// console.log('ddb.config.accessKeyId: ', ddb.config.accessKeyId);
-// console.log('ddb.config.secretAccessKey: ', ddb.config.secretAccessKey);
+// console.log(`ddb.config: ${JSON.stringify(ddb)}`);
+// console.log(`ddb.config.region: ${ddb.config.region}`);
+// console.log(`ddb.config.endpoint: ${ddb.config.endpoint}`);
+// console.log(`ddb.config.accessKeyId: ${ddb.config.accessKeyId}`);
+// console.log(`ddb.config.secretAccessKey: ${ddb.config.secretAccessKey}`);
 
 exports.handler = async event => {
   let connectionData;
@@ -28,12 +28,12 @@ exports.handler = async event => {
     apiVersion: '2018-11-29',
     endpoint: event.requestContext.domainName + '/' + event.requestContext.stage
   });
-  
+
   const postData = JSON.parse(event.body).data;
-  // console.log('# postData: ', postData);
+  // console.log(`# postData: ${postData}`);
   
   const postCalls = connectionData.Items.map(async ({ connectionId }) => {
-    // console.log('############ connectionId: ', connectionId);
+    // console.log(`# connectionId: ${connectionId}`);
     try {
       // Send the message back to all connected clients
       await apigwManagementApi.postToConnection({ 
