@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const { 
-  DYNAMO_END_POINT, 
   AWS_REGION_NAME, 
+  DYNAMO_END_POINT, 
 } = process.env;
 
 exports.GetSDK = () => {
