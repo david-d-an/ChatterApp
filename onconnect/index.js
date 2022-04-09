@@ -5,6 +5,8 @@ const ddb = new aws.DynamoDB.DocumentClient({
 });
 
 exports.handler = async event => {
+
+  
   const putParams = {
     TableName: process.env.TABLE_NAME,
     Item: {
@@ -12,7 +14,7 @@ exports.handler = async event => {
     }
   };
 
-  // console.log(`# onConnect: connectionId: ${putParams.Item.connectionId}`);
+  console.log(`# onConnect: connectionId: ${putParams.Item.connectionId}`);
 
   try {
     // Register the connection ID to DynamoDB
