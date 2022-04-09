@@ -3,6 +3,7 @@ services:
   dynamodb-local:
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
     image: "amazon/dynamodb-local:latest"
+    # URL to local dynamodb-local for SAM Local: http://dynamodb-local:8000
     container_name: dynamodb-local
     ports:
       - "8000:8000"
