@@ -8,6 +8,7 @@
   "dependencies": {},
   "devDependencies": {
     "aws-lambda-ws-server": "^0.1.21",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "aws-sdk": "^2.739.0"
   }
 }
