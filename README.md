@@ -35,6 +35,19 @@ aws cloudformation describe-stacks \
 
 ## Testing the chat API
 
+To test the chat service locally, DynamoDB needs to run first. To run a local DynamoDB service,
+activate Docker Compopose file located at DynamoDB/docker-compose.yml.
+```
+> cd DynamoDB
+> docker-compose up -d
+```
+
+Once the DynamoDB service is running, run a WebSocket simulator located at SocketSimulator/index.js.
+```
+> cd SocketSimulator
+> node index.js
+```
+
 To test the WebSocket API, you can use [wscat](https://github.com/websockets/wscat), an open-source command line tool.
 
 1. [Install NPM](https://www.npmjs.com/get-npm).
@@ -50,7 +63,7 @@ $ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/{STAGE}
 ``` bash
 $ wscat -c wss://{YOUR-API-ID}.execute-api.{YOUR-REGION}.amazonaws.com/prod
 connected (press CTRL+C to quit)
-> {"action":"sendmessage", "data":"hello world"}
+> {"message":"sendmessage", "text":"Hello, World"}
 < hello world
 ```
 
