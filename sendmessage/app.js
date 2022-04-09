@@ -3,14 +3,10 @@ const { GetSDK, GetAPI } = require('./AwsFactory');
 const aws = GetSDK();
 const ddb = new aws.DynamoDB.DocumentClient({ 
   apiVersion: '2012-08-10', 
-  region: 'us-east-2',
 });
 
-// console.log(`ddb.config: ${JSON.stringify(ddb)}`);
 // console.log(`ddb.config.region: ${ddb.config.region}`);
 // console.log(`ddb.config.endpoint: ${ddb.config.endpoint}`);
-// console.log(`ddb.config.accessKeyId: ${ddb.config.accessKeyId}`);
-// console.log(`ddb.config.secretAccessKey: ${ddb.config.secretAccessKey}`);
 
 exports.handler = async event => {
   let connectionData;

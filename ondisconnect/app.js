@@ -7,8 +7,7 @@
 const { GetSDK } = require('./AwsFactory');
 const aws = GetSDK();
 const ddb = new aws.DynamoDB.DocumentClient({ 
-  apiVersion: '2012-08-10', 
-  region: process.env.AWS_REGION 
+  apiVersion: '2012-08-10'
 });
 
 exports.handler = async event => {
