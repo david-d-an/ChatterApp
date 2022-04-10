@@ -24,31 +24,17 @@ exports.handler = async event => {
   }
 
   const apigwManagementApi = GetAPI(aws, event.requestContext);
-  // const postData = JSON.parse(event.body).data;
   const postData = JSON.parse(event.body).text;
-  // console.log(`# event: ${JSON.stringify(event)}`);
-  // console.log(`# postData: ${JSON.stringify(postData)}`);
 
   const postCalls = connectionData.Items.map(async ({ connectionId }) => {
-    // Clean DB for testing
-    // await ddb.delete({ 
-    //   TableName: TABLE_NAME, 
-    //   Key: { connectionId } }
-    // ).promise();
-
     try {
       // Send the message back to all connected clients
       console.log(`posting to connection: ${connectionId}`);
 
       if (AWS_REGION_NAME === 'local') {
         console.log('Localhost loopback');
-        const postToLocalhost = postToConnectionLocalTesting({
-          stage: 'stage',
-          domainName: 'localhost',
-          port: 5005,
-          secure: false
-        })
-        await postToLocalhost({ message: postData }, connectionId);
+        const postToSameGateway = postToConnectionLocalTesting(event);
+        await postToSameGateway({ message: postData }, connectionId);
       } else {
         console.log('Cloud loopback');
         await apigwManagementApi.postToConnection({ 
@@ -57,7 +43,6 @@ exports.handler = async event => {
         }).promise();
       }
     } catch (e) {
-      console.log(`error: ${JSON.stringify(e)}`);
       if (e.statusCode === 410 || e.message.includes('410')) {
         console.log(`Found stale connection, deleting ${connectionId}`);
         await ddb.delete({ 

@@ -42,7 +42,7 @@ const handler = ws.handler({
     },
     sendmessage: async (req) => {
         // console.log('req: ', req);
-        const { message, id, event, context } = req;
+        const { id, event } = req;
 
         const methodName = 'sendmessage';
         console.log(`\nSimulating Gateway Routing:`);
@@ -59,7 +59,14 @@ const handler = ws.handler({
         //     context.postToConnection(msgPack, recipientId)
         // ));
 
-        sendMessage(event);
+        const requestContext = {
+            stage: 'stage',
+            domainName: `localhost`,
+            secure: false
+        }
+        const port = process.env.PORT || 5000;
+        const updatedEvent = {...event, port, requestContext };
+        sendMessage(updatedEvent);
 
         return { statusCode: 200 };
     },
