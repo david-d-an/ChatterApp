@@ -22,26 +22,10 @@ exports.handler = async event => {
     return { statusCode: 500, body: e.stack };
   }
 
-  const apigwManagementApi = GetAPI(aws, event.requestContext);
-  const postData =JSON.parse(event.body).text;
-
+  // Send the message back to all connected clients
   const postCalls = connectionData.Items.map(async ({ connectionId }) => {
     try {
-      // Send the message back to all connected clients
-      console.log(`postData: ${postData}`);
-
-      if (AWS_REGION_NAME === 'local') {
-        console.log(`Localhost loopback: posting to connection: ${connectionId}`);
-        const postToConnectionBuilder = require('aws-post-to-connection')
-        const postToConnection = postToConnectionBuilder(event);
-        await postToConnection({ message: postData }, connectionId);
-      } else {
-        console.log(`Cloud loopback: posting to connection: ${connectionId}`);
-        await apigwManagementApi.postToConnection({ 
-          ConnectionId: connectionId, 
-          Data: postData 
-        }).promise();
-      }
+      await postToConnection(aws, event, connectionId);
     } catch (e) {
       if (e.statusCode === 410 || e.message.includes('410')) {
         console.log(`Found stale connection, deleting ${connectionId}`);
@@ -63,3 +47,22 @@ exports.handler = async event => {
 
   return { statusCode: 200, body: 'Data sent.' };
 };
+
+const postToConnection = async (aws, event, connectionId) => {
+  const apigwManagementApi = GetAPI(aws, event.requestContext);
+  const postData = JSON.parse(event.body).text;
+  console.log(`postData: ${postData}`);
+
+  if (AWS_REGION_NAME === 'local') {
+    console.log(`Localhost loopback: posting to connection: ${connectionId}`);
+    const postToConnectionBuilder = require('aws-post-to-connection');
+    const postToConnection = postToConnectionBuilder(event);
+    await postToConnection({ message: postData }, connectionId);
+  } else {
+    console.log(`Cloud loopback: posting to connection: ${connectionId}`);
+    await apigwManagementApi.postToConnection({ 
+      ConnectionId: connectionId, 
+      Data: postData 
+    }).promise();
+  }
+;}
