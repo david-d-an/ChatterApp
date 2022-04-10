@@ -28,6 +28,7 @@ exports.handler = async event => {
   const postCalls = connectionData.Items.map(async ({ connectionId }) => {
     try {
       // Send the message back to all connected clients
+      console.log(`postData: ${postData}`);
 
       if (AWS_REGION_NAME === 'local') {
         console.log(`Localhost loopback: posting to connection: ${connectionId}`);
