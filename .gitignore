@@ -7,4 +7,4 @@ node_modules/
 package-lock.json
 samconfig.toml
 out.yaml
-shared-local-instance.db
+DynamoDB/docker/dynamodb/shared-local-instance.db
