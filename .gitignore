@@ -8,3 +8,5 @@ package-lock.json
 samconfig.toml
 out.yaml
 DynamoDB/docker/dynamodb/shared-local-instance.db
+
+bucket-name.txt
