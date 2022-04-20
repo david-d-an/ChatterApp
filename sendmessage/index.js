@@ -65,4 +65,4 @@ const postToConnection = async (aws, event, connectionId) => {
       Data: postData 
     }).promise();
   }
-;}
+}
