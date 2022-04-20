@@ -4,7 +4,7 @@
 // $disconnect is a best-effort event. 
 // API Gateway will try its best to deliver the $disconnect event to your integration, but it cannot guarantee delivery.
 
-const { GetSDK } = require('./AwsFactory');
+const { GetSDK } = require('aws-factory');
 const aws = GetSDK();
 const ddb = new aws.DynamoDB.DocumentClient({ 
   apiVersion: '2012-08-10'
