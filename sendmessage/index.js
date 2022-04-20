@@ -1,5 +1,5 @@
 const { TABLE_NAME, AWS_REGION_NAME } = process.env;
-const { GetSDK, GetAPI } = require('./AwsFactory');
+const { GetSDK, GetAPI } = require('aws-factory');
 const aws = GetSDK();
 const ddb = new aws.DynamoDB.DocumentClient({ 
   apiVersion: '2012-08-10', 
