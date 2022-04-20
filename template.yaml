@@ -119,11 +119,23 @@ Resources:
       SSESpecification:
         SSEEnabled: True
       TableName: !Ref TableName
+  
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: ChatAppSharedLayer
+      Description: Code to share with the other lambda functions
+      ContentUri: shared/.
+      CompatibleRuntimes:
+        - nodejs12.x
+      RetentionPolicy: Delete  
   OnConnectFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: onconnect/
       Handler: index.handler
+      Layers:
+        - !Ref SharedLayer
       MemorySize: 256
       Runtime: nodejs12.x
       Environment:
@@ -149,6 +161,8 @@ Resources:
     Properties:
       CodeUri: ondisconnect/
       Handler: index.handler
+      Layers:
+        - !Ref SharedLayer
       MemorySize: 256
       Runtime: nodejs12.x
       Environment:
@@ -174,6 +188,8 @@ Resources:
     Properties:
       CodeUri: sendmessage/
       Handler: index.handler
+      Layers:
+        - !Ref SharedLayer
       MemorySize: 256
       Runtime: nodejs12.x
       Timeout: 5
