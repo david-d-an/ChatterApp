@@ -3,10 +3,12 @@
 .aws-sam/
 */dist/*
 packaged.yaml
-node_modules/
 package-lock.json
 samconfig.toml
 out.yaml
 DynamoDB/docker/dynamodb/shared-local-instance.db
 
 bucket-name.txt
+
+node_modules/
+!shared/nodejs/node_modules/

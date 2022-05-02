@@ -8,10 +8,11 @@
 # To publish the layer, run:
 rm -rf temp_node_modules
 mkdir -p temp_node_modules
+cp package.json temp_node_modules
 cd temp_node_modules
 npm install --production
 cd ..
-mv temp_node_modules/* shared/nodejs/node_modules
+mv temp_node_modules/node_modules/* shared/nodejs/node_modules
 rm -rf temp_node_modules
 
 # To simulate the layer locally, run:
